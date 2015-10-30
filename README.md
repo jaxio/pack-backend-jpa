@@ -1,5 +1,3 @@
----
----
 ## Celerio Generation Template Pack: JPA backend
 
 The Celerio Generation Template Pack "JPA backend" contains a set of source code file templates that
@@ -66,7 +64,7 @@ Please refer to [Celerio Documentation][] for more information.
 
 ## License
 
-The Clerio Generation Template Pack "JPA backend" is released under version 2.0 of the [Apache License][].
+The Celrio Generation Template Pack "JPA backend" is released under version 2.0 of the [Apache License][].
 
 [Apache License]: http://www.apache.org/licenses/LICENSE-2.0
 [Celerio Documentation]: http://www.jaxio.com/documentation/celerio/
