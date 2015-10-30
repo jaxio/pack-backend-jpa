@@ -1,0 +1,3 @@
+markdown: rdiscount
+highlighter: true
+port: 4444

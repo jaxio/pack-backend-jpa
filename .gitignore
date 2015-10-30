@@ -1,2 +1,4 @@
+.idea/
+_site/
 target/
 pack-backend-jpa.iml
