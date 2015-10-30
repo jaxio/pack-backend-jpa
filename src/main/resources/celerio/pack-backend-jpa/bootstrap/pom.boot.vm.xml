@@ -471,7 +471,7 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
         <!-- Dependencies needed by the generated project -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <dependency>
-            <groupId>com.jaxio.jpa.querybyexample</groupId>
+            <groupId>com.jaxio</groupId>
             <artifactId>jpa-querybyexample</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -513,7 +513,7 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
             <version>8.0.28</version>
-        <exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>org.apache.tomcat</groupId>
                     <artifactId>tomcat-juli</artifactId>
