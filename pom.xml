@@ -16,6 +16,25 @@
     <description>The Celerio Generation Template Pack "JPA backend" contains a set of source code file templates that
         are interpreted by Celerio code generator in order to generate an application persistence layer.
     </description>
+
+    <developers>
+        <developer>
+            <id>nromanetti</id>
+            <name>Nicolas Romanetti</name>
+            <email>romanetti@gmail.com</email>
+        </developer>
+        <developer>
+            <id>framiere</id>
+            <name>Florent Ramiere</name>
+            <email>florent@ramiere.com</email>
+        </developer>
+        <developer>
+            <id>jeanlouisboudart</id>
+            <name>Jean-Louis Boudart</name>
+            <email>jeanlouis.boudart@gmail.com</email>
+        </developer>
+    </developers>
+
     <organization>
         <name>JAXIO</name>
         <url>http://www.jaxio.com</url>
@@ -62,9 +81,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
+                <version>2.8.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -79,6 +96,17 @@
                         <phase>initialize</phase>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <!-- http://maven.apache.org/plugins/maven-release-plugin/ -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <releaseProfiles>release</releaseProfiles>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -95,5 +123,30 @@
             <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 
 </project>
