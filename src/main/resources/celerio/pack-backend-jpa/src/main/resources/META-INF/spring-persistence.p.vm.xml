@@ -1,0 +1,24 @@
+$output.resource("META-INF", "spring-persistence.xml")##
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+	<persistence-unit name="${configuration.applicationName}PU" transaction-type="RESOURCE_LOCAL">
+		<description><![CDATA[
+			Main persistence unit.
+			It is named spring-persistence.xml to prevent JBoss from picking it automatically, which would create a mess as we use Spring.
+			With JBoss/Spring it is required to list the classes explicitly.
+		]]></description>
+		<mapping-file>META-INF/spring-orm.xml</mapping-file>
+#foreach ($entity in $project.withoutManyToManyJoinEntities.list)
+#if(!$entity.isVirtual())
+		<class>${entity.model.fullType}</class>
+#end
+#end
+#if($project.search.isNotEmpty())
+		<properties>
+			<property name="hibernate.search.model_mapping" value="${Search.packageName}.SearchMappingFactory" />
+		</properties>
+#end
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,74 @@
+$output.resource("META-INF", "spring-orm.xml")##
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+                 version="2.1">
+	<description><![CDATA[
+		NOTE: You may override the JPA annotations of your Java entities in this file.
+		This is also the standard place to declare your named queries.
+
+		********************************************
+		* ABOUT NAMED QUERIES and SearchParameters *
+		********************************************
+
+		Named query integration is almost transparent, it is done using
+		the generated services and searchParameters.
+
+		To execute a named query
+		========================
+		* Define a named query in this file (some example are provided) or via an annotation in your Entity class.
+
+		* Pass the named query's name and the parameters, if any, to the searchParameters:
+			searchParameters.setNamedQuery("myNamedQuery");
+			searchParameters.addParameter("paramName", paramValue);
+
+		* Use the xxxRepository that handles the Xxx entity that the named query should return.
+			 For example:
+				xxxRepository.find(searchParameters) or
+				xxxRepository.find(xxxModel, searchParameters)
+
+				xxxRepository.findCount(searchParameters)
+				xxxRepository.findCount(xxxModel, searchParameters)
+
+		* When you define your named query the parameters will be replaced with either
+			- the value of xxxModel.get<parameterName>()
+			- the value returned by searchParameters.getParameters().get("<parameterName>")
+
+		Dynamic order By support:
+		=========================
+		If the hint 'dynamic' is present and set to 'true'
+		the query will be dynamically modified to take into account the orderBy
+		information carried by the searchParameters.
+		This is extremely usefuf when rendering sortable data to the view.
+		NOTE: When dynamic is true YOU MUST declare a 'query' hint having exactly the same value as the query tag.
+
+		Dynamic Select count support:
+		=============================
+		Note that if you call xxxRepository.findCount(searchParameters) and that your
+		named query starts with "from" instead of "select", the "select count(*) "
+		will be dynamically appended so it returns what you expect.
+	]]></description>
+#if($configuration.hasModule($CHAR_PADDING))
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<entity-listeners>
+				<entity-listener class="${RepositorySupport.packageName}.PaddingListener" />
+			</entity-listeners>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+#end
+#if ($project.isAccountEntityPresent() && !$project.accountEntity.isVirtual())
+	<entity metadata-complete="false" class="$project.accountEntity.model.fullType">
+		<!-- basic example with dynamic ordering support -->
+		<named-query name="$project.accountEntity.jpa.selectAllNamedQuery">
+			<query>from $project.accountEntity.model.fullType</query>
+			<hint name="dynamic" value="true" />
+			<hint name="query" value="from $project.accountEntity.model.fullType" />
+			<hint name="org.hibernate.cacheable" value="true" />
+		</named-query>
+		<named-native-query name="$project.accountEntity.jpa.selectAllNativeNamedQuery" result-class="$project.accountEntity.model.fullType">
+			<query>select * from $project.accountEntity.entityConfig.tableName</query>
+		</named-native-query>
+	</entity>
+#end
+</entity-mappings>
