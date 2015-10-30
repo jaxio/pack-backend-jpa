@@ -1,22 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <prerequisites>
+        <maven>3.1.1</maven>
+    </prerequisites>
+
     <groupId>com.jaxio.celerio.packs</groupId>
     <artifactId>pack-backend-jpa</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
+    <name>celerio pack-backend-jpa</name>
+    <url>https://github.com/jaxio/pack-backend-jpa</url>
+    <description>The Celerio Generation Template Pack "JPA backend" contains a set of source code file templates that
+        are interpreted by Celerio code generator in order to generate an application persistence layer.
+    </description>
     <organization>
         <name>JAXIO</name>
         <url>http://www.jaxio.com</url>
     </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/jaxio/pack-backend-jpa.git</connection>
+        <developerConnection>scm:git:git@github.com:jaxio/pack-backend-jpa.git</developerConnection>
+        <url>http://github.com/jaxio/pack-backend-jpa/</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>http://github.com/jaxio/pack-backend-jpa/issues#issue/</url>
+    </issueManagement>
 
     <build>
         <resources>
@@ -59,4 +82,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
 </project>
