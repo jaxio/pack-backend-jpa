@@ -56,15 +56,24 @@ Then add Jaxio's Maven repository to your `~/.m2/settings.xml` file:
 
 ### Type the following command from your console
 
-`mvn com.jaxio.celerio:bootstrap-maven-plugin:4.0.0:bootstrap`
+`mvn -Pcelerio com.jaxio.celerio:bootstrap-maven-plugin:4.0.0:bootstrap`
+
+Then follow the instruction...
 
 ## Celerio Documentation
 
 Please refer to [Celerio Documentation][] for more information.
 
+## Contributors, in alphabetical order
+
+* Jean-Louis Boudart
+* Sébastien Péralta
+* Florent Ramière
+* Nicolas Romanetti
+
 ## License
 
-The Celrio Generation Template Pack "JPA backend" is released under version 2.0 of the [Apache License][].
+The Celerio Generation Template Pack "JPA backend" is released under version 2.0 of the [Apache License][].
 
 [Apache License]: http://www.apache.org/licenses/LICENSE-2.0
 [Celerio Documentation]: http://www.jaxio.com/documentation/celerio/
