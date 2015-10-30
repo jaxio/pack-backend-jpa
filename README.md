@@ -1,3 +1,8 @@
+
+
+# WORK IN PROGRESS - NOT READY YET
+
+
 ## Celerio Generation Template Pack: JPA backend
 
 The Celerio Generation Template Pack "JPA backend" contains a set of source code file templates that
