@@ -58,13 +58,15 @@ Then add Jaxio's Maven repository to your `~/.m2/settings.xml` file:
 
 `mvn -Pcelerio com.jaxio.celerio:bootstrap-maven-plugin:4.0.0:bootstrap`
 
-Then follow the instruction...
+Then follow the instructions...
 
 ## Celerio Documentation
 
 Please refer to [Celerio Documentation][] for more information.
 
-## Contributors, in alphabetical order
+## Contributors
+
+In alphabetical order:
 
 * Jean-Louis Boudart
 * Sébastien Péralta
