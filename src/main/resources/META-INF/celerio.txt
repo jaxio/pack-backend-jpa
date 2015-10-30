@@ -2,4 +2,5 @@ packName=${project.artifactId}
 packDescription=Backend only: almost pure JPA 2.1 with Hibernate 5, Spring 4.2
 packDescription2=Generates entities, meta model and repositories. Used by front-end packs.
 packCommand=mvn -Ph2,db,metadata,gen test
-projectLink=https://github.com/jaxio/... TODO link
+projectLink=https://github.com/jaxio/pack-backend-jpa
+
