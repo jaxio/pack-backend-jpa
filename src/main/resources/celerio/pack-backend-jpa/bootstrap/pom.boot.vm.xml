@@ -17,7 +17,7 @@ $output.file("pom.xml")##
         <database.user>${dollar}{project.name}</database.user>
         <database.password>${dollar}{project.name}</database.password>
         <!-- Default values when no database profile is set -->
-        #if ($jdbcConnectivity.isWellKownDatabase())
+#if ($jdbcConnectivity.isWellKownDatabase())
         <!-- jdbc driver dependency -->
         <jdbc.groupId>$jdbcConnectivity.wellKownDatabase.groupId</jdbc.groupId>
         <jdbc.artifactId>$jdbcConnectivity.wellKownDatabase.artifactId</jdbc.artifactId>
@@ -31,7 +31,7 @@ $output.file("pom.xml")##
         <jdbc.password>$jdbcConnectivity.password</jdbc.password>
         <hibernate.dialect>$jdbcConnectivity.wellKownDatabase.hibernateDialect</hibernate.dialect>
         <sql-maven-plugin.delimiter>$jdbcConnectivity.wellKownDatabase.sqlDelimiter</sql-maven-plugin.delimiter>
-        #else
+#else
         <!-- jdbc driver dependency -->
         <jdbc.groupId>com.h2database</jdbc.groupId>
         <jdbc.artifactId>h2</jdbc.artifactId>
@@ -44,7 +44,7 @@ $output.file("pom.xml")##
         <jdbc.password>${dollar}{database.password}</jdbc.password>
         <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
         <sql-maven-plugin.delimiter>;</sql-maven-plugin.delimiter>
-        #end
+#end
         <!-- ~~~~~~ -->
         <!-- System -->
         <!-- ~~~~~~ -->
@@ -54,9 +54,7 @@ $output.file("pom.xml")##
         <!-- Version dependencies when used in multiple dependencies -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <celerio-maven-plugin.outputDir>${dollar}{project.basedir}</celerio-maven-plugin.outputDir>
-        #if ($generation.isUseMavenCelerioPlugin())
         <celerio-maven-plugin.version>$generation.version</celerio-maven-plugin.version>
-        #end
         <hibernate.version>5.0.2.Final</hibernate.version>
         <spring.version>4.2.2.RELEASE</spring.version>
         <spring-security.version>4.0.2.RELEASE</spring-security.version>
@@ -75,14 +73,6 @@ $output.file("pom.xml")##
         <hibernate.use.second.level.cache>true</hibernate.use.second.level.cache>
         <hibernate.use.query.cache>true</hibernate.use.query.cache>
     </properties>
-    <developers>
-        <developer>
-            <name>SpringFuse</name>
-            <email>info@springfuse.com</email>
-            <organization>Springfuse</organization>
-            <organizationUrl>http://www.springfuse.com</organizationUrl>
-        </developer>
-    </developers>
     <profiles>
         <profile>
             <id>postgresql</id>
@@ -141,14 +131,15 @@ $output.file("pom.xml")##
                 <!-- misc -->
                 <sql-maven-plugin.delimiter>;</sql-maven-plugin.delimiter>
             </properties>
-            <dependencies>
-                <!-- db2 License dependency -->
-                <dependency>
+            <!-- db2 License dependency
+<dependencies>
+<dependency>
                     <groupId>com.ibm.db2</groupId>
                     <artifactId>db2jcc_license_cu</artifactId>
                     <version>9.7.0.4</version>
-                </dependency>
-            </dependencies>
+</dependency>
+</dependencies>
+            -->
         </profile>
         <profile>
             <id>mysql</id>
@@ -264,7 +255,6 @@ CREATE USER ${dollar}{database.user} IDENTIFIED BY ${dollar}{database.password};
 GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
  ]]>
                                     </sqlCommand>
-                                    <print>true</print>
                                     <printResultSet>true</printResultSet>
                                     <onError>continue</onError>
                                 </configuration>
@@ -308,7 +298,6 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
                                     <password>${dollar}{jdbc.password}</password>
                                     <autocommit>true</autocommit>
                                     <encoding>UTF-8</encoding>
-                                    <print>true</print>
                                     <printResultSet>true</printResultSet>
                                     <onError>continue</onError>
                                     <delimiter>${dollar}{sql-maven-plugin.delimiter}</delimiter>
@@ -475,7 +464,7 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
             <artifactId>jpa-querybyexample</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <!-- ~~~~~~~~~~~ -->
+                                <!-- ~~~~~~~~~~~ -->
         <!-- PERSISTENCE -->
         <!-- ~~~~~~~~~~~ -->
         <dependency>
@@ -533,13 +522,7 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-search</artifactId>
             <version>5.5.0.Final</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>lucene-kuromoji</artifactId>
-                    <groupId>org.apache.lucene</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+            </dependency>
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-common</artifactId>
@@ -792,7 +775,7 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
     </pluginRepositories>
     <repositories>
         <repository>
-            <id>repository.jboss.org</id>
+            <id>jboss</id>
             <url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
             <snapshots>
                 <enabled>false</enabled>
@@ -800,7 +783,7 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
         </repository>
     </repositories>
 
-    <!-- ~~~~~ -->
+<!-- ~~~~~ -->
     <!-- BUILD -->
     <!-- ~~~~~ -->
     <build>
@@ -844,50 +827,26 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
                 </configuration>
             </plugin>
             <plugin>
-                <!-- http://maven.apache.org/plugins/maven-enforcer-plugin/ -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version>
-                <executions>
-                    <execution>
-                        <id>enforce-java</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireJavaVersion>
-                                    <version>[1.6.0-26,)</version>
-                                </requireJavaVersion>
-                                <requireMavenVersion>
-                                    <version>3.0.3</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>${dollar}{jdk.version}</source>
-                    <target>${dollar}{jdk.version}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
-            #if($config.requiresJavaBuildHelper($JAVA) || $config.requiresJavaBuildHelper($JAVA_TEST))
+#if($config.requiresJavaBuildHelper($JAVA) || $config.requiresJavaBuildHelper($JAVA_TEST))
             <plugin>
                 <!-- http://mojo.codehaus.org/build-helper-maven-plugin/ -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>1.9.1</version>
                 <executions>
-                    #if($config.requiresJavaBuildHelper($JAVA))
+#if($config.requiresJavaBuildHelper($JAVA))
                     <execution>
                         <id>Adding generated java folder to build</id>
                         <phase>generate-sources</phase>
@@ -897,12 +856,14 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
                         <configuration>
                             <sources>
                                 <source>${dollar}{celerio-maven-plugin.outputDir}/${JAVA.unixFolder}</source>
+#if(!$JAVA.sameAsGeneratedFolder())
                                 <source>${dollar}{celerio-maven-plugin.outputDir}/${JAVA.unixGeneratedFolder}</source>
+#end
                             </sources>
                         </configuration>
                     </execution>
-                    #end
-                    #if($config.requiresJavaBuildHelper($JAVA_TEST))
+#end
+#if($config.requiresJavaBuildHelper($JAVA_TEST))
                     <execution>
                         <id>Adding generated java test location to test build</id>
                         <phase>generate-sources</phase>
@@ -912,36 +873,49 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
                         <configuration>
                             <sources>
                                 <source>${dollar}{celerio-maven-plugin.outputDir}/${JAVA_TEST.unixFolder}</source>
-                                <source>${dollar}{celerio-maven-plugin.outputDir}/${JAVA_TEST.unixGeneratedFolder}
-                                </source>
+#if(!$JAVA_TEST.sameAsGeneratedFolder())
+                                <source>${dollar}{celerio-maven-plugin.outputDir}/${JAVA_TEST.unixGeneratedFolder}</source>
+#end
                             </sources>
                         </configuration>
                     </execution>
-                    #end
+#end
                 </executions>
             </plugin>
-            #end
+#end
+#if($project.entitiesWithFiles.isNotEmpty())
             <plugin>
-                <!-- http://maven.apache.org/plugins/maven-idea-plugin/ -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-idea-plugin</artifactId>
-                <version>2.2.1</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <jdkLevel>${dollar}{jdk.version}</jdkLevel>
-                    <dependenciesAsLibraries>true</dependenciesAsLibraries>
-                    <useFullNames>false</useFullNames>
-                </configuration>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>instrument jpa model to support lazy loading of files</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <taskdef name="instrument"
+                                         classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+                                    <classpath>
+                                        <path refid="maven.dependency.classpath"/>
+                                        <path refid="maven.runtime.classpath"/>
+                                    </classpath>
+                                </taskdef>
+                                <instrument verbose="true">
+                                    <fileset dir="${dollar}{project.build.outputDirectory}">
+#foreach($entity in $project.entitiesWithFiles.list)
+                                        <include name="${entity.model.fullType.replace("                                        <include name="${entity.model.fullType.replace(".","/")}.class" />
+#end
+                                    </fileset>
+                                </instrument>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
-            <plugin>
-                <!-- http://maven.apache.org/plugins/maven-eclipse-plugin/ -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                </configuration>
-            </plugin>
+#end
             <plugin>
                 <!-- http://maven.apache.org/plugins/maven-install-plugin/ -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -997,4 +971,3 @@ GRANT CONNECT, RESOURCE TO ${dollar}{database.user};
         </plugins>
     </build>
 </project>
-
