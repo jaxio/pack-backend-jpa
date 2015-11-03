@@ -66,6 +66,17 @@ Then follow the instructions...
 
 Please refer to [Celerio Documentation][] for more information.
 
+## Change Log
+
+### 1.0.1
+
+* Fix login page i18n rendering
+* Clean up generated pom.xml
+
+### 1.0
+
+* initial version, upgraded from our private distribution
+
 ## Contributors
 
 In alphabetical order:
