@@ -34,6 +34,7 @@ $output.file("pom.xml")##
         <hibernate.dialect>$jdbcConnectivity.hibernateDialect</hibernate.dialect>
         <sql-maven-plugin.delimiter>$jdbcConnectivity.sqlDelimiter</sql-maven-plugin.delimiter>
 #else
+        <jdbc.type>h2</jdbc.type>
         <!-- h2 driver -->
         <jdbc.groupId>com.h2database</jdbc.groupId>
         <jdbc.artifactId>h2</jdbc.artifactId>
