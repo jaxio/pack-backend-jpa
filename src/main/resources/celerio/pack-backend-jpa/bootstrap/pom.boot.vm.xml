@@ -17,9 +17,11 @@ $output.file("pom.xml")##
         <database.user>${dollar}{project.name}</database.user>
         <database.password>${dollar}{project.name}</database.password>
 
-
 #if ($jdbcConnectivity.isValid())
-        <!-- jdbc driver dependency -->
+        <!-- **** DO NOT USE A PRODUCTION DATABASE **** -->
+
+<jdbc.type>todo</jdbc.type><!-- see 'db' profile, it is used to find the sql script -->
+        <!-- jdbc driver -->
         <jdbc.groupId>$jdbcConnectivity.driverGroupId</jdbc.groupId>
         <jdbc.artifactId>$jdbcConnectivity.driverArtifactId</jdbc.artifactId>
         <jdbc.version>$jdbcConnectivity.driverArtifactIdVersion</jdbc.version>
@@ -34,13 +36,17 @@ $output.file("pom.xml")##
         <hibernate.dialect>$jdbcConnectivity.hibernateDialect</hibernate.dialect>
         <sql-maven-plugin.delimiter>$jdbcConnectivity.sqlDelimiter</sql-maven-plugin.delimiter>
 #else
+        <!-- **** CHANGE THE PROPERTIES BELOW TO USE YOUR OWN DATABASE **** -->
+        <!-- **** DO NOT USE A PRODUCTION DATABASE **** -->
         <jdbc.type>h2</jdbc.type>
-        <!-- h2 driver -->
+<!-- see 'db' profile, it is used to find the sql script -->
+
+        <!-- h2 jdbc driver -->
         <jdbc.groupId>com.h2database</jdbc.groupId>
         <jdbc.artifactId>h2</jdbc.artifactId>
         <jdbc.version>1.4.190</jdbc.version>
 
-        <!-- jdbc settings for h2 -->
+        <!-- h2 jdbc settings -->
         <jdbc.driver>org.h2.Driver</jdbc.driver>
         <jdbc.url>jdbc:h2:~/.h2/${dollar}{database.name};MVCC=TRUE;FILE_LOCK=NO</jdbc.url>
         <jdbc.user>${dollar}{database.user}</jdbc.user>
@@ -66,7 +72,7 @@ $output.file("pom.xml")##
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <!-- Variables substituted in resources file at build time -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-        <!-- Log level, see by src/main/resource/log4j.properties -->
+        <!-- logs -->
         <log.target>${dollar}{project.build.directory}/logs</log.target>
         <log.level>DEBUG</log.level>
         <log.sql.queries.level>DEBUG</log.sql.queries.level>
@@ -332,7 +338,6 @@ $output.file("pom.xml")##
             </exclusions>
         </dependency>
         <dependency>
-            <!-- jdbc driver depends on the database profile used -->
             <groupId>${dollar}{jdbc.groupId}</groupId>
             <artifactId>${dollar}{jdbc.artifactId}</artifactId>
             <version>${dollar}{jdbc.version}</version>
@@ -584,15 +589,6 @@ $output.file("pom.xml")##
             <version>${dollar}{spring.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- ~~~~~~~~~~~~ -->
-        <!-- JAVA UTILITY -->
-        <!-- ~~~~~~~~~~~~ -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.6</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
     <!-- ~~~~~~~~~~~~ -->
     <!-- REPOSITORIES -->
@@ -616,7 +612,7 @@ $output.file("pom.xml")##
         </repository>
     </repositories>
 
-<!-- ~~~~~ -->
+    <!-- ~~~~~ -->
     <!-- BUILD -->
     <!-- ~~~~~ -->
     <build>
