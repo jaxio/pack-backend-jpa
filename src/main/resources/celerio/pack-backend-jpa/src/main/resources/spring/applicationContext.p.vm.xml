@@ -48,7 +48,7 @@ $output.spring("applicationContext.xml")##
 		p:password="${dollar}{jdbc.password}" 
 		p:initialSize="1" 
 		p:maxActive="50" 
-		p:maxIdle="1" 
+		p:maxIdle="10"
 		p:maxWait="1000" 
 		p:defaultAutoCommit="false" 
 		p:removeAbandoned="true" 
