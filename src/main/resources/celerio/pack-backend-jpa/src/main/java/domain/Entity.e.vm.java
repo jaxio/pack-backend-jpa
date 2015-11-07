@@ -16,6 +16,7 @@ $output.java($entity.model)##
 
 $output.require("org.slf4j.Logger")##
 $output.require("org.slf4j.LoggerFactory")##
+$output.require("com.google.common.base.MoreObjects")##
 $output.require("com.google.common.base.Objects")##
 
 #if($entity.hasComment())
@@ -687,7 +688,7 @@ $output.require($Context, "LocaleHolder")##
      */
     @Override
     public String toString() {
-        return #if ($entity.hasParent())super.toString() + #{end}Objects.toStringHelper(this) //
+        return #if ($entity.hasParent())super.toString() + #{end}MoreObjects.toStringHelper(this) //
 #foreach ($attribute in $entity.nonCpkAttributes.list)
 #if(!$attribute.isInFk() || $attribute.isSimplePk())
             .add("${attribute.var}", #if($attribute.isPassword())"XXXX"#else${attribute.getter}()#end) //
