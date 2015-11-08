@@ -36,7 +36,7 @@ public class $output.currentClass implements Serializable {
             } else {
                 technicalId = new java.rmi.dgc.VMID();
                 log.warn("DEVELOPER: hashCode is not safe." //
-                        + "If you encounter this message you should take the time to carefuly " //
+                        + "If you encounter this message you should take the time to carefully " //
                         + "review the equals/hashCode methods for: " + identifiable.getClass().getCanonicalName() //
                         + " You may consider using a business key.");
             }

@@ -638,7 +638,7 @@ $output.require("$entity.collectionType.implementationFullType")##
 
         if (previousHashCode != 0 && previousHashCode != hashCode) {
             log.warn("DEVELOPER: hashCode has changed!." //
-                    + "If you encounter this message you should take the time to carefuly review equals/hashCode for: " //
+                    + "If you encounter this message you should take the time to carefully review equals/hashCode for: " //
                     + getClass().getCanonicalName());
         }
 
