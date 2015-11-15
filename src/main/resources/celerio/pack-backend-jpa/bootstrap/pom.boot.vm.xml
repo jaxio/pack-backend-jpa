@@ -184,18 +184,6 @@ $output.file("pom.xml")##
                     </plugin>
                 </plugins>
             </build>
-            <repositories>
-                <repository>
-                    <id>jaxio-repository</id>
-                    <url>http://maven.jaxio.com/repository</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>jaxio-repository</id>
-                    <url>http://maven.jaxio.com/repository</url>
-                </pluginRepository>
-            </pluginRepositories>
         </profile>
         <profile>
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -221,24 +209,12 @@ $output.file("pom.xml")##
                             <dependency>
                                 <groupId>com.jaxio.celerio.packs</groupId>
                                 <artifactId>pack-backend-jpa</artifactId>
-                                <version>1.0.1</version>
+                                <version>1.0.2</version>
                             </dependency>
                         </dependencies>
                     </plugin>
                 </plugins>
             </build>
-            <repositories>
-                <repository>
-                    <id>jaxio-repository</id>
-                    <url>http://maven.jaxio.com/repository</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>jaxio-repository</id>
-                    <url>http://maven.jaxio.com/repository</url>
-                </pluginRepository>
-            </pluginRepositories>
         </profile>
         <profile>
             <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -262,18 +238,6 @@ $output.file("pom.xml")##
                     </plugin>
                 </plugins>
             </build>
-            <repositories>
-                <repository>
-                    <id>jaxio-repository</id>
-                    <url>http://maven.jaxio.com/repository</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>jaxio-repository</id>
-                    <url>http://maven.jaxio.com/repository</url>
-                </pluginRepository>
-            </pluginRepositories>
         </profile>
     </profiles>
     <!-- ~~~~~~~~~~~~ -->
@@ -287,14 +251,18 @@ $output.file("pom.xml")##
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <!-- Dependencies needed by the generated project -->
         <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <!-- ~~~~~~~~~~~ -->
+        <!-- PERSISTENCE -->
+        <!-- ~~~~~~~~~~~ -->
+
+        <!-- https://github.com/jaxio/jpa-query-by-example -->
         <dependency>
             <groupId>com.jaxio</groupId>
             <artifactId>jpa-querybyexample</artifactId>
             <version>1.0.1</version>
         </dependency>
-        <!-- ~~~~~~~~~~~ -->
-        <!-- PERSISTENCE -->
-        <!-- ~~~~~~~~~~~ -->
+
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
