@@ -209,7 +209,7 @@ $output.file("pom.xml")##
                             <dependency>
                                 <groupId>com.jaxio.celerio.packs</groupId>
                                 <artifactId>pack-backend-jpa</artifactId>
-                                <version>1.0.2</version>
+                                <version>1.0.3-SNAPSHOT</version>
                             </dependency>
                         </dependencies>
                     </plugin>
