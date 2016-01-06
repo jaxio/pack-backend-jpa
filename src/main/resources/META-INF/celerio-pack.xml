@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<celerioPack xmlns="http://www.jaxio.com/schema/celerio">
+    <packName value="${project.artifactId}"/>
+    <packVersion value="${project.version}"/>
+    <packDescription value="Backend only: almost pure JPA 2.1 with Hibernate 5, Spring 4.2"/>
+    <packDescription2 value="Generates entities, meta model and repositories. Used by front-end packs."/>
+    <packCommand value="mvn -Pdb,metadata,gen test"/>
+    <packCommandHelp value=""/>
+    <projectLink value="https://github.com/jaxio/pack-backend-jpa"/>
+    <!-- no context for now
+    <celerioTemplateContext>
+        <entityContextProperties>
+            <entityContextProperty property="rest" subPackage="rest" suffix="Resource"/>
+        </entityContextProperties>
+    </celerioTemplateContext>
+    -->
+</celerioPack>
