@@ -22,7 +22,7 @@ $output.require("org.hibernate.search.bridge.TwoWayFieldBridge")##
 public class $output.currentClass implements TwoWayFieldBridge {
 
     @Override
-    public Object get(String name, Document document) {
+    public Object get(String name, org.apache.lucene.document.Document document) {
         $primaryKey.type $primaryKey.var = new ${primaryKey.type}();
 #foreach ($attribute in $primaryKey.attributes)
 #if($attribute.isNumeric())
@@ -45,13 +45,13 @@ public class $output.currentClass implements TwoWayFieldBridge {
     }
 
     @Override
-    public void set(String name, Object value, Document document, LuceneOptions luceneOptions) {
+    public void set(String name, Object value, org.apache.lucene.document.Document document, LuceneOptions luceneOptions) {
         $primaryKey.type $primaryKey.var = ($primaryKey.type) value;
 #foreach ($attribute in $primaryKey.attributes)
 #if($attribute.isNumeric())
         luceneOptions.addNumericFieldToDocument(name + ".$attribute.var", ${primaryKey.var}.${attribute.getter}(), document);
 #else
-    luceneOptions.addFieldToDocument(name + ".$attribute.var", ${primaryKey.var}.${attribute.getter}(), document);
+        luceneOptions.addFieldToDocument(name + ".$attribute.var", ${primaryKey.var}.${attribute.getter}(), document);
 #end
 #end
     }
