@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <celerioPack xmlns="http://www.jaxio.com/schema/celerio">
-    <packName value="${project.artifactId}"/>
-    <packVersion value="${project.version}"/>
+    <packName value="pack-backend-jpa"/>
     <packDescription value="Backend only: almost pure JPA 2.1 with Hibernate 5, Spring 4.2"/>
     <packDescription2 value="Generates entities, meta model and repositories. Used by front-end packs."/>
     <packCommand value="mvn -Pdb,metadata,gen test"/>
