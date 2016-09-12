@@ -744,7 +744,7 @@ $output.require($Audit, "AuditContextHolder")##
             ${entity.auditEntityAttributes.creationAuthor.setter}(AuditContextHolder.username());
 #end
 #if($entity.auditEntityAttributes.isCreationDateSet())
-            ${entity.auditEntityAttributes.creationDate.setter}(new ${entity.auditEntityAttributes.creationDate.type}());
+            ${entity.auditEntityAttributes.creationDate.setter}(${entity.auditEntityAttributes.creationDate.mappedType.getJavaValue('now()')});
 #end
         }
     }
@@ -759,7 +759,7 @@ $output.require($Audit, "AuditContextHolder")##
             ${entity.auditEntityAttributes.lastModificationAuthor.setter}(AuditContextHolder.username());
 #end
 #if($entity.auditEntityAttributes.isLastModificationDateSet())
-            ${entity.auditEntityAttributes.lastModificationDate.setter}(new ${entity.auditEntityAttributes.lastModificationDate.type}());
+            ${entity.auditEntityAttributes.lastModificationDate.setter}(${entity.auditEntityAttributes.lastModificationDate.mappedType.getJavaValue('now()')});
 #end
         }
     }
