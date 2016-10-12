@@ -9,11 +9,14 @@ are interpreted by Celerio code generator in order to generate an application pe
 
 This pack is part of Celerio distribution.
 
-Have already Maven 3 and Java 1.8 installed ?
+*Prerequisites:*
+
+* [Java Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [Maven 3.3.3](https://maven.apache.org/download.cgi)
 
 To generate an application from this pack simply execute:
 
-    mvn com.jaxio.celerio:bootstrap-maven-plugin:4.0.12:bootstrap
+    mvn com.jaxio.celerio:bootstrap-maven-plugin:bootstrap
 
 Please read [Celerio Documentation](http://www.jaxio.com/documentation/celerio) for more details.
 
